@@ -12,12 +12,20 @@ Add lenis for smooth Scrolling" 19/3/26 Time:03:17AM},
 
 # TeamRole
 
-# To-do list:
-2 different pages for admin and user-> admin.[domain] and [domain]/[routes]
-figuring out the nginx mapping for file serving for both admin and user
-Implement concept of signing keys using jwt
-Rotation of signing keys via bash scripts
-Key evolution and rotation history via git 
-Automation of key rotation via cron jobs
-Implement sliding window refresh
-Functioning mail server for the contact page
+## 🛠️ To-Do List
+
+### 🔐 Authentication & Security
+- Implement JWT-based signing keys
+- Add signing key rotation using bash scripts
+- Maintain key evolution and rotation history via Git
+- Automate key rotation using cron jobs
+- Implement sliding window refresh mechanism
+
+### 🌐 Routing & Deployment
+- Create separate interfaces for:
+  - Admin → `admin.[domain]`
+  - User → `[domain]/[routes]`
+- Configure Nginx for proper routing and file serving for both admin and user
+
+### 📧 Communication
+- Set up a functioning mail server for the contact page
