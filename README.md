@@ -12,7 +12,7 @@ Add lenis for smooth Scrolling" 19/3/26 Time:03:17AM},
 
 # TeamRole
 
-To-do list:
+# To-do list:
 2 different pages for admin and user-> admin.[domain] and [domain]/[routes]
 figuring out the nginx mapping for file serving for both admin and user
 Implement concept of signing keys using jwt
