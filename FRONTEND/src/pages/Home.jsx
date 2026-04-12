@@ -2,6 +2,8 @@ import React from "react";
 import HeroPage from "../SECTIONS/HeroPage";
 import Navbar from "../components/Navbar";
 import About from "../SECTIONS/About";
+import Team from "../SECTIONS/Team";
+import Footer from "../SECTIONS/Footer";
 
 const Home = () => {
   return (
@@ -9,6 +11,9 @@ const Home = () => {
       <Navbar />
       <HeroPage />
       <About />
+      <Team/>
+      <Footer/>
+
       
     </div>
   );

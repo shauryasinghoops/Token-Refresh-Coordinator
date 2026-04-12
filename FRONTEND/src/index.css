@@ -64,10 +64,19 @@ h6 {
 .slidedown {
   animation: slidedown 700ms ease-out both;
 }
+
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-gradient {
@@ -254,6 +263,7 @@ svg {
 }
 
 @media (max-width: 1024px) {
+
   .grid-3,
   .resp-grid-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -261,6 +271,7 @@ svg {
 }
 
 @media (max-width: 768px) {
+
   .row,
   .resp-row {
     flex-direction: column;
@@ -291,6 +302,7 @@ svg {
 }
 
 @media (max-width: 480px) {
+
   .section-space,
   .resp-section {
     padding-block: 1.5rem;
