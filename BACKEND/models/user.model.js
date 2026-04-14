@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';       
-import jwt from 'jsonwebtoken';
  
 const userSchema = new mongoose.Schema({
     name : {
@@ -32,7 +30,7 @@ const userSchema = new mongoose.Schema({
     refreshToken: {
         type: String,
         default: null,
-        select: false,  // When you do User.find(), this field is NOT returned you must explicitely ask for it.
+        select: false, 
     },
     tokenVersion: {
         type: Number,
@@ -40,36 +38,6 @@ const userSchema = new mongoose.Schema({
     },
 })
 
-userSchema.statics.hashPassword = async function (password){
-    return await bcrypt.hash(password, 10);      
-};
-
-userSchema.methods.isValidPassword = async function (password){
-    return await bcrypt.compare(password, this.password);
-};
-
-userSchema.methods.generateAccessToken = function(){
-    return jwt.sign({id: this._id.toString(),
-                     email: this.email,
-                     role: this.role,
-                     tokenVersion: this.tokenVersion,
-                    },
-                process.env.JWT_ACCESS_SECRET,
-                {expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || "15m"}
-            );
-};
-
-userSchema.methods.generateRefreshToken = function(){
-    return jwt.sign(
-        {id: this._id.toString(),
-         tokenVersion: this.tokenVersion,    
-        },
-        process.env.JWT_REFRESH_SECRET,
-        {expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || "7d"}
-    );
-};
-
 const user = mongoose.model('user' , userSchema);
-
 
 export default user;
