@@ -29,7 +29,7 @@ A comprehensive authentication and authorization project focused on secure JWT m
 
 - **Frontend:** React (Vite), Tailwind CSS, Framer Motion, Lenis.
 - **Backend:** Node.js, Express, MongoDB (Mongoose), JWT, Bcrypt.
-- **Security:** OpenSSL (Key Generation), SHA256 (Audit Logging).
+- **Security:** OpenSSL (Key Generation), SHA256 Checksum (Audit Logging).
 - **DevOps:** Bash Scripting, PM2 (Process Management).
 
 ---
@@ -54,7 +54,7 @@ A comprehensive authentication and authorization project focused on secure JWT m
 ## Getting Started
 
 ### 1. Prerequisites
-- **Node.js** (v18+)
+- **Node.js** (v24+)
 - **MongoDB** (running locally or via Atlas)
 - **OpenSSL** (for key rotation script)
 
@@ -62,15 +62,8 @@ A comprehensive authentication and authorization project focused on secure JWT m
 For both `Admin/BACKEND` and `User/BACKEND`:
 1. Navigate to the directory: `cd Admin/BACKEND` or `cd User/BACKEND`
 2. Install dependencies: `npm install`
-3. Configure Environment Variables:
-   Create a `.env` file based on `.env-example`:
-   ```env
-   MONGODB_URI=your_mongodb_uri
-   JWT_ACCESS_SECRET=your_initial_secret
-   JWT_REFRESH_SECRET=your_initial_refresh_secret
-   PORT=3000 (User) or 3001 (Admin)
-   ```
-4. Start the server: `npm start`
+3. Configure Environment Variables: Create a `.env` file based on `.env-example`:
+4. Start the server using pm2
 
 ### 3. Frontend Setup (Admin & User)
 For both `Admin/Frontend` and `User/FRONTEND`:
@@ -97,7 +90,7 @@ To rotate your JWT secrets manually:
 ## Deployment via GCP (Google Cloud Platform)
 
 ### 1. VM Instance Setup
-1. **Create Instance:** Create a VM instance (`e2-small` recommended) with **Ubuntu 24.04 LTS**.
+1. **Create Instance:** Create a VM instance (`e2-small`) with **Ubuntu 24.04 LTS**.
 2. **Disk:** Allocate at least 20GB Standard Persistent Disk.
 3. **Firewall:** Enable **Allow HTTP traffic** and **Allow HTTPS traffic**.
 4. **Networking:** In the "Network tags" section, ensure `http-server` and `https-server` tags are present.
@@ -110,18 +103,19 @@ SSH into your VM and run the following to install dependencies:
 sudo apt update && sudo apt upgrade -y
 
 # Install Node.js (LTS)
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt install -y nodejs
 
 # Install MongoDB
 sudo apt-get install -y gnupg curl
-curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
-echo "deb [ [arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg] ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+curl -fsSL https://pgp.mongodb.com/server-8.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.2.list
 sudo apt update && sudo apt install -y mongodb-org
-sudo systemctl start mongod && sudo systemctl enable mongod
+sudo systemctl enable mongod && sudo systemctl start mongod
 
 # Install Nginx & PM2
 sudo apt install -y nginx
+sudo systemctl enable nginx && sudo systemctl start nginx
 sudo npm install -g pm2
 ```
 
