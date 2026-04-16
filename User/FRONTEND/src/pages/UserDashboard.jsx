@@ -10,8 +10,11 @@ import SystemDesign from '../SECTIONS/SystemDesign';
 const UserDashboard = () => {
     const { user, logout } = useAuth();
 
+    const isdashboard = useLocation().pathname === '/dashboard';
     const isprofile = useLocation().pathname === '/dashboard/profile';
     const issystemdesign = useLocation().pathname === '/dashboard/systemdesign';
+    
+
 
     return (
         <div className="h-screen bg-black font-sans flex flex-col">
@@ -25,14 +28,9 @@ const UserDashboard = () => {
 
                 <div className="flex items-center gap-6">
                     <span className="text-md text-zinc-500 font-medium">
-                        <span className="text-white uppercase">Hello, <span className='text-yellow-100'>{user?.name}</span></span>
+                        <span className="text-white uppercase">Welcome! <span className='text-yellow-100'>{user?.name}</span></span>
                     </span>
-                    <button
-                        onClick={logout}
-                        className="bg-white text-black text-xs font-bold px-4 py-1.5 rounded hover:bg-zinc-200 transition-colors uppercase"
-                    >
-                        Logout
-                    </button>
+
                 </div>
             </nav>
 
@@ -41,6 +39,7 @@ const UserDashboard = () => {
                     <Sidebar />
                 </div>
                 <div className='flex-1 h-full bg-black overflow-y-auto'>
+                    {isdashboard && <Profile />}
                     {isprofile && <Profile />}
                     {issystemdesign && <SystemDesign />}
                 </div>

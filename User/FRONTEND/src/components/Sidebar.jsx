@@ -5,7 +5,7 @@ const Sidebar = () => {
     const location = useLocation();
     
     return (
-        <div className="w-full h-full bg-black border-r border-zinc-800 flex flex-col gap-2 text-white px-2 py-4">
+        <div className="w-full h-full bg-black border-r border-zinc-800 flex flex-col gap-4 text-white px-5 py-4">
 
             <Link
                 to="/dashboard/profile"

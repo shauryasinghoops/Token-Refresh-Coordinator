@@ -1,6 +1,4 @@
 import { validationResult } from 'express-validator';
-import jwt, { decode } from "jsonwebtoken";
-import mongoose from 'mongoose';
 import adminModel from '../models/admin.model.js';
 import userModel from '../models/user.model.js';
 import { generateToken } from '../lib/utils.js';

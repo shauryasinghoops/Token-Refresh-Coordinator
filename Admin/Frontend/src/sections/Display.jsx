@@ -3,7 +3,6 @@ import axios from "axios";
 
 const Display = () => {
     const [allUsers, setAllUsers] = useState([]);
-    const [log, setLog] = useState("Loading logs...");
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -22,19 +21,7 @@ const Display = () => {
             }
         };
 
-        const fetchLog = async () => {
-            try {
-                const response = await axios.get("http://localhost:3001/admin/rotation-log", {
-                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-                });
-                setLog(response.data.log);
-            } catch (error) {
-                setLog("Error fetching rotation logs.");
-            }
-        };
-
         fetchUsers();
-        fetchLog();
     }, []);
 
     return (
@@ -47,7 +34,10 @@ const Display = () => {
             </div>
 
             <div className="flex flex-col gap-3 mt-5">
-                {allUsers.map((user) => (
+                {allUsers.length === 0 ? (
+                    <p className="text-zinc-500 text-sm mt-4">No users found. Make sure the User backend is running and connected to the same database.</p>
+                ) : (
+                    allUsers.map((user) => (
                     <div
                         key={user._id || user.email}
                         className="group border-b border-zinc-800 p-5 hover:bg-zinc-900/40 transition-all duration-300"
@@ -83,18 +73,8 @@ const Display = () => {
 
                         </div>
                     </div>
-                ))}
-            </div>
-
-            <div className="mt-20">
-                <div className="border-b border-zinc-800 pb-6 mb-8">
-                    <h2 className="text-white text-4xl md:text-6xl font-bold tracking-tighter uppercase">
-                        Key Rotation Log
-                    </h2>
-                </div>
-                <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-lg font-mono text-sm text-zinc-300 overflow-x-auto whitespace-pre-wrap">
-                    {log}
-                </div>
+                    ))
+                )}
             </div>
         </div>
     );

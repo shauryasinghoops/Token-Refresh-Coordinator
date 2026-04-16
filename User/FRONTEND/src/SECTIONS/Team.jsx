@@ -1,6 +1,58 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FaChevronRight, FaTimes } from 'react-icons/fa';
+import { FaChevronRight, FaTimes, FaGithub } from 'react-icons/fa';
+import Shauryaa from '../assets/download.png';
+import Shaurya from '../assets/Shaurya.png';
+import Shobhit from '../assets/Shobhit.png';
+import Shreyy from '../assets/downloadother.png';
+import Shiv from   '../assets/shiv.png';
+import Shrey from '../assets/wing-2.png';
+import ShivamRai from '../assets/ShivamRai.png';
+import downloadotherss from '../assets/downloadotherss.png';
+
+const teamMembers = [
+    {
+        name: "Shaurya Pratap Singh",
+        role: "Frontend Developer",
+        image: Shauryaa,
+        github: "https://github.com/shauryasinghoops",
+        objectPosition: "50% 20%",
+
+    },
+        {
+        name: "Shobhit Kumar Dubey",
+        role: "Backend Developer",
+        image: Shobhit,
+        github: "https://github.com/shauryasinghoops",
+        objectPosition: "50% 20%",
+    },
+    {
+        name: "Shrey Rastogi",
+        role: "Devops Engineer",
+        image: Shreyy,
+        github: "https://github.com/shauryasinghoops",
+        objectPosition: "50% 20%",
+    },
+    {
+        name: "Shivam Gupta",
+        role: "Database Manager",
+        image: Shiv,
+        github: "https://github.com/shauryasinghoops",
+        objectFit: "contain",
+        objectPosition: "50% 50%",
+    },
+     {
+        name: "Shivam Rai",
+        role: "Backend Developer",
+        image: downloadotherss,
+        github: "https://github.com/shauryasinghoops",
+        objectPosition: "50% 20%",
+    }
+
+];
+
+// Repeat team members enough times to fill the infinite scroll
+const slides = [...teamMembers, ...teamMembers, ...teamMembers, ...teamMembers, ...teamMembers];
 
 const Team = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,9 +67,9 @@ const Team = () => {
     }, []);
 
     return (
-        <div className="w-full h-180 bg-black flex justify-center items-center relative overflow-hidden font-sans border-t-1 border-zinc-800">
+        <div id="team" className="w-full h-180 bg-black flex justify-center items-center relative overflow-hidden font-sans border-t border-zinc-800">
 
-            {/* Blue Ambient Glow (Animated on Entrance) */}
+            {/* Ambient Glow */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -33,17 +85,15 @@ const Team = () => {
                     y: { type: "spring", stiffness: 50, damping: 20 }
                 }}
                 className="absolute w-[600px] h-[600px] bg-blue-600/15 blur-[120px] rounded-full pointer-events-none z-0"
-            ></motion.div>
+            />
 
-            {/* 1. Static Content Layer (Premium Staggered Blur Reveal) */}
+            {/* Headline */}
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                variants={{
-                    visible: { transition: { staggerChildren: 0.15 } }
-                }}
-                className={`relative z-10 flex flex-col items-center transition-all duration-1000 ${isMenuOpen ? 'opacity-0 scale-90 blur-2xl' : 'opacity-100'}`}
+                variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+                className={`relative z-10 flex flex-col items-center transition-all duration-700 ${isMenuOpen ? 'opacity-0 scale-90 blur-2xl pointer-events-none' : 'opacity-100'}`}
             >
                 <motion.h1
                     variants={{
@@ -51,7 +101,7 @@ const Team = () => {
                         visible: { opacity: 1, y: 0, filter: 'blur(0px)' }
                     }}
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-6xl font-black text-white tracking-tighter uppercase leading-none"
+                    className="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none text-center"
                 >
                     Want to meet the Developers
                 </motion.h1>
@@ -61,25 +111,35 @@ const Team = () => {
                         visible: { opacity: 1, y: 0, filter: 'blur(0px)' }
                     }}
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-6xl font-black text-white tracking-tighter uppercase leading-none mt-2"
+                    className="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none mt-2 text-center"
                 >
-                    Behind This Project ?
+                    Behind This Project?
                 </motion.h1>
+                <motion.p
+                    variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 }
+                    }}
+                    transition={{ duration: 0.8 }}
+                    className="text-zinc-500 text-base mt-5 tracking-wide"
+                >
+                    Click the arrow to explore →
+                </motion.p>
             </motion.div>
 
-            {/* 2. Right-Center Action Button */}
+            {/* Toggle Button */}
             <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="absolute right-12 z-50 w-16 h-16 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 active:scale-90 transition-all cursor-pointer group shadow-[0_0_30px_rgba(255,255,255,0.2)]"
             >
                 {isMenuOpen ? (
-                    <FaTimes size={24} className="rotate-90" />
+                    <FaTimes size={24} />
                 ) : (
                     <FaChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
                 )}
             </button>
 
-            {/* 3. The Sliding Infinite Carousel Layer */}
+            {/* Sliding Team Carousel */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
@@ -89,28 +149,21 @@ const Team = () => {
                         transition={{ type: 'spring', damping: 25, stiffness: 120 }}
                         className="absolute inset-0 bg-white z-40 overflow-hidden"
                     >
-                        {/* INFINITE SCROLLING CONTAINER */}
                         <motion.div
-                            className="flex h-full w-fit"
-                            animate={{ x: ['0%', '-50%'] }} // Scroll half way (across the clones)
-                            transition={{
-                                duration: 18,
-                                repeat: Infinity,
-                                ease: "linear"
-                            }}
+                            className="flex h-full"
+                            style={{ width: `${slides.length * 100}vw` }}
+                            animate={{ x: ['0vw', `-${slides.length * 50}vw`] }}
+                            transition={{ duration: slides.length * 5, repeat: Infinity, ease: "linear" }}
                         >
-                            {/* Slide Pack 01 */}
-                            <TeamSlide name="Frontend" color="bg-white" />
-                            <TeamSlide name="Backend Developer" color="bg-white" />
-                            <TeamSlide name="UI Designer" color="bg-white" />
-
-
-                            {/* Clone Pack (The "Mirror" for infinite effect) */}
-                            <TeamSlide name="Lead Architect" color="bg-white" />
-                            <TeamSlide name="Backend Dev" color="bg-white" />
-                            <TeamSlide name="UI Designer" color="bg-white" />
-
+                            {slides.map((member, i) => (
+                                <TeamSlide key={i} member={member} />
+                            ))}
                         </motion.div>
+
+                        {/* Close hint */}
+                        <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-zinc-600 text-xs tracking-widest uppercase">
+                            Click → to close
+                        </p>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -118,15 +171,70 @@ const Team = () => {
     );
 };
 
-const TeamSlide = ({ name, color }) => (
-    <div className={`w-[100vw] h-full ${color} flex flex-col items-center justify-center border-r-30 border-black`}>
-        <div className="space-y-4 text-center">
+const TeamSlide = ({ member }) => {
+    const [hovered, setHovered] = useState(false);
 
-            <h2 className="text-4xl font-black text-black uppercase tracking-tighter">{name}</h2>
-            <div className="h-px w-20 bg-black/20 mx-auto"></div>
+    return (
+        <div className="w-[100vw] h-full flex items-center justify-center border-r border-zinc-200 bg-white relative overflow-hidden">
 
+            {/* Left — Photo in grayscale */}
+            <div
+                className="w-1/2 h-full flex items-start justify-center overflow-hidden relative"
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+            >
+                {member.image ? (
+                    <img
+                        src={member.image}
+                        alt={member.name}
+                        className="h-full w-full transition-all duration-700"
+                        style={{
+                            filter: hovered ? 'grayscale(0%)' : 'grayscale(100%)',
+                            objectFit: member.objectFit || 'cover',
+                            objectPosition: member.objectPosition || '50% 20%'
+                        }}
+                    />
+                ) : (
+                    <div className="w-full h-full bg-zinc-100 flex items-center justify-center">
+                        <span className="text-zinc-300 text-6xl font-black tracking-tighter">
+                            {member.name.charAt(0)}
+                        </span>
+                    </div>
+                )}
+
+                {/* Gradient overlay at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+            </div>
+
+            {/* Right — Name + Role + GitHub */}
+            <div className="w-1/2 h-full flex flex-col items-start justify-center px-14 relative">
+
+                {/* GitHub logo watermark behind the name */}
+
+                {/* Role tag */}
+                <span className="text-lg  font-semibold text-black border p-4 border-black uppercase tracking-widest mb-4px-3 py-1 rounded-full">
+                    {member.role}
+                </span>
+
+                {/* Name */}
+                <h1 className="text-6xl md:text-7xl font-black text-black uppercase tracking-tighter leading-none mb-6 relative z-10">
+                    {member.name}
+                </h1>
+
+                {/* GitHub link button */}
+                <a
+                    href={member.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 bg-white text-black px-5 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-all group relative z-10"
+                >
+                    <FaGithub size={20} />
+                    View on GitHub
+                    <FaChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+            </div>
         </div>
-    </div>
-)
+    );
+};
 
 export default Team;
