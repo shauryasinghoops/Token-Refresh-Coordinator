@@ -34,20 +34,18 @@ export const authAdmin = async(req, res , next) => {
 
         console.log("Token decoded successfully for adminId:", decode.adminId);
 
-            const adminDetail = await admin.findById(decode.adminId).select("-password"); 
-            
-            if(!adminDetail){
-                console.log("Admin not found in DB for ID:", decode.adminId);
-                return res.status(401).json({"error" : "User Not Found"});
-            }
-
-            req.admin = adminDetail;
-            next();
-        } catch (error) {
-            return res.status(401).json({ message: "Invalid token here" });
+        const adminDetail = await admin.findById(decode.adminId).select("-password"); 
+        
+        if(!adminDetail){
+            console.log("Admin not found in DB for ID:", decode.adminId);
+            return res.status(401).json({"error" : "User Not Found"});
         }
 
+        req.admin = adminDetail;
+        next();
+
     }catch(err){
+        console.error("Auth middleware error:", err.message);
         return res.status(400).json({"error" : "Unauthorised Admin"});
     }
 }
