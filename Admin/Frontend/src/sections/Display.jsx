@@ -3,12 +3,13 @@ import axios from "axios";
 
 const Display = () => {
     const [allUsers, setAllUsers] = useState([]);
+    const [log, setLog] = useState("Loading logs...");
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:3001/admin/users",
+                    "/admin/users",
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -21,15 +22,27 @@ const Display = () => {
             }
         };
 
+        const fetchLog = async () => {
+            try {
+                const response = await axios.get("/admin/rotation-log", {
+                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+                });
+                setLog(response.data.log);
+            } catch (error) {
+                setLog("Error fetching rotation logs.");
+            }
+        };
+
         fetchUsers();
+        fetchLog();
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-black to-zinc-900 px-4 md:px-10">
+        <div className="min-h-screen bg-gradient-to-b from-black to-zinc-900 px-4 md:px-10 pb-20">
             
             <div className="border-b border-zinc-800 pb-9 pt-6">
-                <h1 className="text-white text-5xl md:text-8xl font-bold tracking-tighter">
-                    ALL USERS
+                <h1 className="text-white text-5xl md:text-8xl font-bold tracking-tighter uppercase">
+                    All Users
                 </h1>
             </div>
 
@@ -71,6 +84,17 @@ const Display = () => {
                         </div>
                     </div>
                 ))}
+            </div>
+
+            <div className="mt-20">
+                <div className="border-b border-zinc-800 pb-6 mb-8">
+                    <h2 className="text-white text-4xl md:text-6xl font-bold tracking-tighter uppercase">
+                        Key Rotation Log
+                    </h2>
+                </div>
+                <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-lg font-mono text-sm text-zinc-300 overflow-x-auto whitespace-pre-wrap">
+                    {log}
+                </div>
             </div>
         </div>
     );

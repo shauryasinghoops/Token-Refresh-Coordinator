@@ -18,5 +18,7 @@ router.post('/logout',authentication.authAdmin, adminController.logoutController
 
 router.get('/users', authentication.authAdmin,  adminController.getAllUsersController);
 
+router.get('/rotation-log', authentication.authAdmin, adminController.getRotationLog);
+
 
 export default router;
