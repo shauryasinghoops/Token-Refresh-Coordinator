@@ -122,9 +122,9 @@ sudo npm install -g pm2
 ### 3. Application Deployment
 1. **Clone & Install:**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/shauryasinghoops/Token-Refresh-Coordinator
    cd Token-Refresh-Coordinator
-   # Install for all 4 directories (Admin/BACKEND, Admin/Frontend, User/BACKEND, User/FRONTEND)
+   # npm install for all 4 directories (Admin/BACKEND, Admin/Frontend, User/BACKEND, User/FRONTEND)
    ```
 2. **Build Frontends:**
    ```bash
