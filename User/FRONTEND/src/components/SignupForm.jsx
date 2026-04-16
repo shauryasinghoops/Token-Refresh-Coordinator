@@ -50,11 +50,11 @@ const SignupForm = () => {
                             <input
                                 type="text"
                                 name="name"
-                                placeholder="John Doe"
+                                placeholder="MAHESH SINGH"
                                 value={formData.name}
                                 onChange={handleChange}
                                 disabled={loading}
-                                className="w-full border border-zinc-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-all"
+                                className="w-full border border-zinc-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-all text-black"
                             />
                         </div>
 
@@ -68,7 +68,7 @@ const SignupForm = () => {
                                 className="w-full border border-zinc-300 rounded-lg px-3 text-black py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-all bg-white"
                             >
                                 <option value="User">User</option>
-                                <option value="Admin">Admin</option>
+                                
                             </select>
                         </div>
                     </div>

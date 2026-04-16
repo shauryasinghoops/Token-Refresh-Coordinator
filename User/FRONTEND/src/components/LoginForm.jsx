@@ -54,7 +54,7 @@ const LoginForm = () => {
                     <div className="space-y-1.5">
                         <div className="flex justify-between items-center">
                             <label className="text-sm font-medium text-zinc-700">Password</label>
-                            <a href="#" className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors">Forgot password?</a>
+                            
                         </div>
                         <input
                             type="password"

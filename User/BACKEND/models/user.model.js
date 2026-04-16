@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['User', 'Admin'],
+        enum: ['User'],
         default: 'User'
     },
     refreshToken: {
@@ -66,4 +66,4 @@ userSchema.methods.generateRefreshToken = function(){
 
 const user = mongoose.model('user' , userSchema);
 
-export default user;
+export default user;
